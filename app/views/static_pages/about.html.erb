@@ -1,7 +1,16 @@
+<!-- provide to set different titles -->
+<!-- executes code inside -->
+<!-- associate "Home" with the label :title-->
+
+<% provide(:title, "About") %>
+
 <!DOCTYPE html>
 <html>
   <head>
-    <title>About | Ruby on Rails Tutorial Sample App</title>
+  	
+  	 
+    <!-- displays code inside by using yield-->
+    <title><%= yield(:title) %> | Ruby on Rails Tutorial Sample App</title>
   </head>
   <body>
     <h1>About</h1>
