@@ -17,7 +17,8 @@ class StaticPagesControllerTest < ActionController::TestCase
     # particular HTML tag (sometimes called a “selector” 
   
     # assert_select "title", "Home | Ruby on Rails Tutorial Sample App"
-    assert_select "title", "Home | #{@base_title}"
+    # assert_select "title", "Home | #{@base_title}"
+    assert_select "title", "#{@base_title}"
   end
 
   test "should get help" do
