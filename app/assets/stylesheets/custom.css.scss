@@ -1,0 +1,32 @@
+// we can use the @import function to include 
+// Bootstrap (together with the associated Sprockets utility)
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+
+/* universal */
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  padding-top: 60px;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+}
+
+.center h1 {
+  margin-bottom: 10px;
+}
