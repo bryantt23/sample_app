@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   
   
+  get 'users/new'
+
   # root method arranges for the root path / to be routed to a 
   # controller and action of our choice
 
@@ -20,5 +22,7 @@ Rails.application.routes.draw do
   
   get 'about'   => 'static_pages#about'
   get 'contact' => 'static_pages#contact'
+  
+  get 'signup'  => 'users#new'
 
 end
