@@ -18,7 +18,10 @@
     	
    	<!-- flash alert, code is used throughout the site  -->
       <% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <!-- streamlined version of code below -->
+        <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+        
+        <!-- <div class="alert alert-<%= message_type %>"><%= message %></div> -->
       <% end %>
       
       <%= yield %>
