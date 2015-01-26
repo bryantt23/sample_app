@@ -25,4 +25,8 @@ Rails.application.routes.draw do
   
   get 'signup'  => 'users#new'
 
+# endows our sample application with all the actions needed for a 
+# RESTful Users resource, along with a large number of 
+# named routes (Section 5.3.3) for generating user URLs
+resources :users
 end
