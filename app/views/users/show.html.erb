@@ -3,12 +3,6 @@ assuming the existence of an instance variable called @user -->
 
 <%= @user.name %>, <%= @user.email %>
 
-<% provide(:title, @user.name) %>
-<h1>
-  <%= gravatar_for @user %>
-  <%= @user.name %>
-</h1>
-
 <!-- Adding a sidebar  -->
 <% provide(:title, @user.name) %>
 <div class="row">
