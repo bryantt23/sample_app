@@ -69,10 +69,20 @@ attribute
   # Returns true if the given token matches the digest.
   def authenticated?(remember_token)
     
+#     to pass test about user logging out in one browser but not 
+# the other browser. i think it's because the password will now be nil
+    return false if remember_digest.nil?
+# return guarantees that the rest of method gets ignored if digest is nil
+    
  # verify that a given remember token matches the user’s remember digest
     BCrypt::Password.new(remember_digest).is_password?(remember_token)
   end
 
+  # Forgets a user.
+  # undoes user.remember by updating the remember digest with nil
+  def forget
+    update_attribute(:remember_digest, nil)
+  end
 
 
 end

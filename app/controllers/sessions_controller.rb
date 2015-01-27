@@ -40,7 +40,11 @@ one request longer than we want.
   end
 
   def destroy
-    log_out
+    # log_out
+
+#   to pass test about a user clicking logout in a second window.
+    log_out if logged_in?
+    
     redirect_to root_url
   end
 

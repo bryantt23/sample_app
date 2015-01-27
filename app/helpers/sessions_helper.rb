@@ -9,7 +9,6 @@ cookie created by the cookies method, the temporary cookie
 created by the session method expires 
 immediately when the browser is closed.
 =end
-
   # Logs in the given user.
   def log_in(user)
     session[:user_id] = user.id
@@ -26,8 +25,7 @@ immediately when the browser is closed.
 # placing it on the browser
     cookies.permanent.signed[:user_id] = user.id
     cookies.permanent[:remember_token] = user.remember_token
-  end
-  
+  end  
 =begin
 In case you're wondering why we don't just use the signed user id, 
   without the remember token, this would allow an attacker with 
@@ -36,20 +34,6 @@ In case you're wondering why we don't just use the signed user id,
   both cookies can log in as the user only until the user logs out.
 =end
 
-=begin 
-older way before Listing 8.36
-  # Returns the current logged-in user (if any).
-  def current_user
-    
-    # stores the result of User.find_by in an instance variable, 
-    # which hits the database the first time but returns 
-    # the instance variable immediately on subsequent invocations
-    
-    @current_user ||= User.find_by(id: session[:user_id])
- # find_by only gets executed if @current_user hasnâ€™t yet been assigned  
-#  https://www.railstutorial.org/book/log_in_log_out#aside-or_equals     
-  end
-=end
 
 
   # Returns the user corresponding to the remember token cookie.
@@ -79,9 +63,17 @@ not a comparison, but rather is an assignment
     !current_user.nil?
   end
   
+  # Forgets a persistent session.
+  def forget(user)
+    user.forget
+    cookies.delete(:user_id)
+    cookies.delete(:remember_token)
+  end
+
   # Logs out the current user.
 #   delete user from the session
   def log_out
+    forget(current_user)
     session.delete(:user_id)
     @current_user = nil
   end
@@ -89,3 +81,19 @@ not a comparison, but rather is an assignment
   
   
 end
+
+
+=begin 
+older way before Listing 8.36
+  # Returns the current logged-in user (if any).
+  def current_user
+    
+    # stores the result of User.find_by in an instance variable, 
+    # which hits the database the first time but returns 
+    # the instance variable immediately on subsequent invocations
+    
+    @current_user ||= User.find_by(id: session[:user_id])
+ # find_by only gets executed if @current_user hasnâ€™t yet been assigned  
+#  https://www.railstutorial.org/book/log_in_log_out#aside-or_equals     
+  end
+=end
