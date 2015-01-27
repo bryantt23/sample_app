@@ -18,6 +18,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     # @user = User.new(params[:user])    # Not the final implementation!
     if @user.save
+      
+#       log in new users automatically as part of the signup process
+      log_in @user
       flash[:success] = "Welcome to the Sample App!"
       
 # redirect to a different page, Rails automatically knows its to a url
