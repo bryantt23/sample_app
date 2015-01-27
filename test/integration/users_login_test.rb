@@ -1,7 +1,20 @@
 require 'test_helper'
 
 class UsersLoginTest < ActionDispatch::IntegrationTest
-
+  
+=begin
+Visit the login path.
+Post valid information to the sessions path.
+Verify that the login link disappears.
+Verify that a logout link appears
+Verify that a profile link appears.
+=end
+  
+  def setup
+    @user = users(:michael)
+  end
+  
+  
 =begin
 Visit the login path.
 Verify that the new sessions form renders properly.
