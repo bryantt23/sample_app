@@ -33,6 +33,12 @@ immediately when the browser is closed.
     !current_user.nil?
   end
   
+  # Logs out the current user.
+#   delete user from the session
+  def log_out
+    session.delete(:user_id)
+    @current_user = nil
+  end
   
   
   
