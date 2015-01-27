@@ -25,7 +25,15 @@ immediately when the browser is closed.
     
     @current_user ||= User.find_by(id: session[:user_id])
  # find_by only gets executed if @current_user hasn’t yet been assigned  
-#  https://www.railstutorial.org/book/log_in_log_out#aside-or_equals 
-    
+#  https://www.railstutorial.org/book/log_in_log_out#aside-or_equals     
   end
+
+  # Returns true if the user is logged in, false otherwise.
+  def logged_in?
+    !current_user.nil?
+  end
+  
+  
+  
+  
 end
