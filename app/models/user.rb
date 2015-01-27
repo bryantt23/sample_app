@@ -66,6 +66,13 @@ attribute
     update_attribute(:remember_digest, User.digest(remember_token))
   end
 
+  # Returns true if the given token matches the digest.
+  def authenticated?(remember_token)
+    
+ # verify that a given remember token matches the user’s remember digest
+    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+  end
+
 
 
 end
