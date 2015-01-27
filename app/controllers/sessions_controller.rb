@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       # Log the user in and redirect to the user's show page.
     else
       # Create an error message.
-      flash[:danger] = 'Invalid email/password combination' # Not quite right!
+      # flash[:danger] = 'Invalid email/password combination' # Not quite right!
 
 =begin   
 The issue is that the contents of the flash persist for one request, 
@@ -21,6 +21,11 @@ re-rendering a template with render doesn't count as a request.
 The result is that the flash message persists 
 one request longer than we want. 
 =end
+      
+   # Unlike the contents of flash, the contents of flash.now disappear 
+   # as soon as there is an additional request
+      
+      flash.now[:danger] = 'Invalid email/password combination'
       
       render 'new'
     end
