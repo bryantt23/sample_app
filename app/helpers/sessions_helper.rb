@@ -14,4 +14,18 @@ immediately when the browser is closed.
   def log_in(user)
     session[:user_id] = user.id
   end
+
+
+  # Returns the current logged-in user (if any).
+  def current_user
+    
+    # stores the result of User.find_by in an instance variable, 
+    # which hits the database the first time but returns 
+    # the instance variable immediately on subsequent invocations
+    
+    @current_user ||= User.find_by(id: session[:user_id])
+ # find_by only gets executed if @current_user hasn’t yet been assigned  
+#  https://www.railstutorial.org/book/log_in_log_out#aside-or_equals 
+    
+  end
 end
