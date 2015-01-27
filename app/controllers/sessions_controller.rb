@@ -12,6 +12,16 @@ class SessionsController < ApplicationController
       # Log the user in and redirect to the user's show page.
     else
       # Create an error message.
+      flash[:danger] = 'Invalid email/password combination' # Not quite right!
+
+=begin   
+The issue is that the contents of the flash persist for one request, 
+but--unlike a redirect, which we used in Listing 7.24--
+re-rendering a template with render doesn't count as a request. 
+The result is that the flash message persists 
+one request longer than we want. 
+=end
+      
       render 'new'
     end
   end
