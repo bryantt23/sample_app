@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
   
+#   available via user.remember_token (for storage in the cookies)
+# but does NOT store in database
+  attr_accessor :remember_token
   
   before_save { self.email = email.downcase }
   # before_save { email.downcase! }
@@ -45,6 +48,23 @@ class User < ActiveRecord::Base
     BCrypt::Password.create(string, cost: cost)
   end
 
+  # Returns a random token.
+  def User.new_token
+    
+#    can generate tokens for account activation and password reset links
+    SecureRandom.urlsafe_base64
+  end
+
+
+=begin
+without self the assignment would create a local variable called remember_token
+But using self ensures that assignment sets the userâ€™s remember_token 
+attribute
+=end
+  def remember
+    self.remember_token = User.new_token
+    update_attribute(:remember_digest, User.digest(remember_token))
+  end
 
 
 
