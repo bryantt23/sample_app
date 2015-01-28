@@ -35,7 +35,19 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
   
-  
+#   very similar to create if/else 
+  def update
+    @user = User.find(params[:id])
+    
+#     uses strong parameters
+    if @user.update_attributes(user_params)
+      flash[:success] = "Profile updated"
+      redirect_to @user
+    else
+      render 'edit'
+    end
+  end
+
   
   
   # Since user_params will only be used internally by the 

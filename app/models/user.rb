@@ -15,7 +15,9 @@ class User < ActiveRecord::Base
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
   has_secure_password
-  validates :password, length: { minimum: 6 }
+  
+# allow_blank: true to pass update tests  
+  validates :password, length: { minimum: 6 }, allow_blank: true
   
 
 #   http://stackoverflow.com/questions/12142374/railstutorial-org-chapter-6-unknown-attribute-password
