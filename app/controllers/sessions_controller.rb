@@ -12,11 +12,14 @@ class SessionsController < ApplicationController
       # Log the user in and redirect to the user's show page.
       log_in user
       
-      # Handling the submission of the “remember me” checkbox   
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       
-      # remember a logged-in user
-      remember user
+      # Handling the submission of the “remember me” checkbox   
+      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+#       the above line supercedes the remember user
+      
+      # # remember a logged-in user
+      # remember user
       
 #       Rails automatically converts this to: user_url(user)
       redirect_to user

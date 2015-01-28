@@ -48,6 +48,11 @@ not a comparison, but rather is an assignment
 
       @current_user ||= User.find_by(id: user_id)
     elsif (user_id = cookies.signed[:user_id])
+      
+      # raise       # The tests still pass, so this branch is currently untested.
+#       this was later deleted to pass or something, idk Listing 8.57
+
+
       user = User.find_by(id: user_id)
       if user && user.authenticated?(cookies[:remember_token])
         log_in user
