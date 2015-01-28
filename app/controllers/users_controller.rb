@@ -30,13 +30,17 @@ class UsersController < ApplicationController
     end
   end
   
+  # id of the user is available in the params[:id] variable
+  def edit
+    @user = User.find(params[:id])
+  end
+  
   
   
   
   # Since user_params will only be used internally by the 
   # Users controller and need not be exposed to 
   # external users via the web, we’ll make it private 
-
   private
 
     def user_params
