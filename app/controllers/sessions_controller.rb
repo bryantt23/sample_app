@@ -14,9 +14,11 @@ class SessionsController < ApplicationController
       
       # Handling the submission of the “remember me” checkbox   
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+#       this replaces remember user below
       
-      # remember a logged-in user
-      remember user
+#       
+      # # remember a logged-in user
+      # remember user
       
 #       Rails automatically converts this to: user_url(user)
       redirect_to user

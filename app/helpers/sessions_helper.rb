@@ -48,6 +48,16 @@ not a comparison, but rather is an assignment
 
       @current_user ||= User.find_by(id: user_id)
     elsif (user_id = cookies.signed[:user_id])
+      
+  # This branch is completely untested. 
+  # raise an exception in the suspected untested block of code: 
+  # if the code isn’t covered, the tests will still pass; 
+  # if it is covered, the resulting error will 
+  # identify the relevant test
+            
+      # raise       # The tests still pass, so this branch is currently untested.
+# on 8.57 he then removes the raise to pass a test. why? idk
+
       user = User.find_by(id: user_id)
       if user && user.authenticated?(cookies[:remember_token])
         log_in user
