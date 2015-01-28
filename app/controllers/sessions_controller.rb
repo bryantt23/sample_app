@@ -12,6 +12,12 @@ class SessionsController < ApplicationController
       # Log the user in and redirect to the user's show page.
       log_in user
       
+<<<<<<< HEAD
+=======
+      # Handling the submission of the “remember me” checkbox   
+      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+      
+>>>>>>> parent of 9c879b4... 8.5d
       # remember a logged-in user
       remember user
       
