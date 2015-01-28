@@ -13,11 +13,14 @@ class SessionsController < ApplicationController
       log_in user
       
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
       # Handling the submission of the “remember me” checkbox   
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       
 >>>>>>> parent of 9c879b4... 8.5d
+=======
+>>>>>>> parent of 648893e... 8.4.5d
       # remember a logged-in user
       remember user
       
