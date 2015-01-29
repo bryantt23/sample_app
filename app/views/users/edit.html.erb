@@ -8,6 +8,8 @@
     <!-- partial introduced in Section 7.3.3 -->
       <%= render 'shared/error_messages' %>
       
+      <%= render 'fields', f: f %>
+      <!-- 
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>
 
@@ -18,8 +20,8 @@
       <%= f.password_field :password, class: 'form-control' %>
 
       <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
-      
+      <%= f.password_field :password_confirmation, class: 'form-control' %> -->
+            
       <%= f.submit "Save changes", class: "btn btn-primary" %>
     <% end %>
 
