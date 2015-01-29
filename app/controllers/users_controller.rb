@@ -66,7 +66,10 @@ class UsersController < ApplicationController
     end
   end
 
-  
+  # strong parameters 
+  # admin is not in the list of permitted attributes. 
+  # This is what prevents arbitrary users from granting 
+  # themselves administrative access to our application.
   
   # Since user_params will only be used internally by the 
   # Users controller and need not be exposed to 
