@@ -17,10 +17,16 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     assert_template 'users/edit'
   end
 
-  test "successful edit" do
-    log_in_as(@user)
+
+#  test tries to visit the edit page, then logs in, and then 
+# checks that the user is redirected to the edit page instead of 
+# the default profile page
+
+# removes the test for rendering the edit template
+  test "successful edit with friendly forwarding" do
     get edit_user_path(@user)
-    assert_template 'users/edit'
+    log_in_as(@user)
+    assert_redirected_to edit_user_path(@user)
     name  = "Foo Bar"
     email = "foo@bar.com"
     

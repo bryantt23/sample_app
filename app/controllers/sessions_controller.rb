@@ -20,7 +20,12 @@ class SessionsController < ApplicationController
       # remember user
       
 #       Rails automatically converts this to: user_url(user)
-      redirect_to user
+      # redirect_to user
+      
+#       supercedes line above 
+# To implement the forwarding itself, we use the redirect_back_or method to 
+# redirect to the requested URL if it exists, or some default URL otherwise
+      redirect_back_or user
       
     else
       # Create an error message.

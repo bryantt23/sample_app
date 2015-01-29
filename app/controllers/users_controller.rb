@@ -77,6 +77,12 @@ class UsersController < ApplicationController
     # Confirms a logged-in user.
     def logged_in_user
       unless logged_in?
+        
+        # puts the requested URL in the session variable under the key 
+        # :forwarding_url, but only for a GET request
+        store_location
+#         sessions_helper method
+        
         flash[:danger] = "Please log in."
         redirect_to login_url
       end
