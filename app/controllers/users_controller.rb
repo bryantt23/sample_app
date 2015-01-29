@@ -7,6 +7,11 @@ class UsersController < ApplicationController
     
   # By default, before filters apply to every action in a controller
 #   so here we restrict the filter to act only on the :edit and :update actions
+
+  # To redirect users trying to edit another user’s profile, we’ll add a 
+  # second method called correct_user, together with a before filter to call it   
+  before_action :correct_user,   only: [:edit, :update]
+  
   
   def show
 #     instance variable = find method on User model to retrieve from 
@@ -75,5 +80,17 @@ class UsersController < ApplicationController
         flash[:danger] = "Please log in."
         redirect_to login_url
       end
+    end   
+    
+    # Confirms the correct user.
+    def correct_user
+      @user = User.find(params[:id])
+      # redirect_to(root_url) unless @user == current_user
+       
+       # refactoring - define a current_user? boolean method for use in the 
+       # correct_user before filter, defined in the Sessions helpers
+      redirect_to(root_url) unless current_user?(@user)
     end
+    
+    
 end

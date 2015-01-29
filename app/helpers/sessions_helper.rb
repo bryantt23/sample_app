@@ -35,7 +35,19 @@ In case you're wondering why we don't just use the signed user id,
 =end
 
 
+=begin
+boolean method for use in the correct_user before filter
+to replace code like
+unless @user == current_user
+with the (slightly) more expressive
+unless current_user?(@user)
+=end  
+  # Returns true if the given user is the current user.
+  def current_user?(user)
+    user == current_user
+  end
 
+  
   # Returns the user corresponding to the remember token cookie.
   def current_user
 
