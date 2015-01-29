@@ -1,5 +1,12 @@
 class UsersController < ApplicationController
   
+  # Before filters use the before_action command to arrange for 
+  # a particular method to be called before the given actions.
+    
+    before_action :logged_in_user, only: [:edit, :update]
+    
+  # By default, before filters apply to every action in a controller
+#   so here we restrict the filter to act only on the :edit and :update actions
   
   def show
 #     instance variable = find method on User model to retrieve from 
@@ -60,4 +67,13 @@ class UsersController < ApplicationController
                                    :password_confirmation)
     end
   
+    # Before filters
+
+    # Confirms a logged-in user.
+    def logged_in_user
+      unless logged_in?
+        flash[:danger] = "Please log in."
+        redirect_to login_url
+      end
+    end
 end
