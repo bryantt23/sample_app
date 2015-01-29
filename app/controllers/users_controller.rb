@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   # Before filters use the before_action command to arrange for 
   # a particular method to be called before the given actions.
     
-    before_action :logged_in_user, only: [:edit, :update]
+  before_action :logged_in_user, only: [:index, :edit, :update]
     
   # By default, before filters apply to every action in a controller
 #   so here we restrict the filter to act only on the :edit and :update actions
@@ -12,6 +12,9 @@ class UsersController < ApplicationController
   # second method called correct_user, together with a before filter to call it   
   before_action :correct_user,   only: [:edit, :update]
   
+  def index
+    @users = User.all
+  end
   
   def show
 #     instance variable = find method on User model to retrieve from 
