@@ -3,14 +3,20 @@ class UsersController < ApplicationController
   # Before filters use the before_action command to arrange for 
   # a particular method to be called before the given actions.
     
-  before_action :logged_in_user, only: [:index, :edit, :update]
-    
+  # before_action :logged_in_user, only: [:index, :edit, :update]
+      before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
+      
+      
   # By default, before filters apply to every action in a controller
 #   so here we restrict the filter to act only on the :edit and :update actions
 
   # To redirect users trying to edit another user’s profile, we’ll add a 
   # second method called correct_user, together with a before filter to call it   
   before_action :correct_user,   only: [:edit, :update]
+  
+  # To enforce access control using a before filter, 
+  # this time to restrict access to the destroy action to admins
+  before_action :admin_user,     only: :destroy
   
   def index
     # @users = User.all
@@ -64,6 +70,17 @@ class UsersController < ApplicationController
     else
       render 'edit'
     end
+        
+  def destroy
+    # combine the find and destroy into one line
+    User.find(params[:id]).destroy
+    
+    flash[:success] = "User deleted"
+    redirect_to users_url
+  end
+    
+    
+    
   end
 
   # strong parameters 
@@ -106,6 +123,12 @@ class UsersController < ApplicationController
        # correct_user before filter, defined in the Sessions helpers
       redirect_to(root_url) unless current_user?(@user)
     end
+    
+    # Confirms an admin user.
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
+    end
+    
     
     
 end
