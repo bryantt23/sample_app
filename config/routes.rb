@@ -7,5 +7,11 @@ Rails.application.routes.draw do
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
+  
   resources :users
+  
+# activation email will involve a URL of the form
+# edit_account_activation_url(activation_token, ...)
+# which means we’ll need a named route for the edit action  
+resources :account_activations, only: [:edit]
 end
