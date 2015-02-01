@@ -2,8 +2,10 @@ class User < ActiveRecord::Base
   
 #   available via user.remember_token (for storage in the cookies)
 # but does NOT store in database
+  attr_accessor :remember_token, :activation_token, :reset_token
+  
+  # attr_accessor :remember_token, :activation_token
   # attr_accessor :remember_token
-  attr_accessor :remember_token, :activation_token
 # As required by the virtual nature of the activation token, 
 # we’ve added a second attr_accessor to our model
 
@@ -114,6 +116,19 @@ attribute
   # Sends activation email.
   def send_activation_email
     UserMailer.account_activation(self).deliver_now
+  end
+
+
+  # Sets the password reset attributes.
+  def create_reset_digest
+    self.reset_token = User.new_token
+    update_attribute(:reset_digest,  User.digest(reset_token))
+    update_attribute(:reset_sent_at, Time.zone.now)
+  end
+
+  # Sends password reset email.
+  def send_password_reset_email
+    UserMailer.password_reset(self).deliver_now
   end
 
   private
