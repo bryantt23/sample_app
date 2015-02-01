@@ -38,4 +38,20 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  
+  
+  # To see the results of the templates defined in 
+  # Listing 10.10 and Listing 10.11, we can use email previews, 
+  # which are special URLs exposed by Rails to 
+  # let us see what our email messages look like. 
+  # First, we need to add some configuration to 
+  # our application’s development environment 
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :test
+
+host = 'localhost:3000' # Local server
+  # host = 'http://frozen-springs-1358.herokuapp.com/'
+  
+  config.action_mailer.default_url_options = { host: host }
+  
 end

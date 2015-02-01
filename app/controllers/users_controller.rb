@@ -41,14 +41,20 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     # @user = User.new(params[:user])    # Not the final implementation!
-    if @user.save
-      
+    if @user.save      
 #       log in new users automatically as part of the signup process
-      log_in @user
-      flash[:success] = "Welcome to the Sample App!"
-      
+      # log_in @user
+      # Before, we redirected to the user’s profile page 
+      # flash[:success] = "Welcome to the Sample App!"
 # redirect to a different page, Rails automatically knows its to a url
-      redirect_to @user
+      # redirect_to @user
+      
+      
+     # now that we’re requiring account activation
+ # we now redirect to the root URL
+      UserMailer.account_activation(@user).deliver_now
+      flash[:info] = "Please check your email to activate your account."
+      redirect_to root_url            
     else
       render 'new'
     end
