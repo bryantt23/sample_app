@@ -103,6 +103,18 @@ attribute
 # methods only used internally by the User model, 
 # so not exposed to outside users
 
+      # If the user is authenticated according to the booleans, 
+      # we need to activate the user and update the activated_at timestamp
+  # Activates an account.
+  def activate
+    update_attribute(:activated,    true)
+    update_attribute(:activated_at, Time.zone.now)
+  end
+
+  # Sends activation email.
+  def send_activation_email
+    UserMailer.account_activation(self).deliver_now
+  end
 
   private
 

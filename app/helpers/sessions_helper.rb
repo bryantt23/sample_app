@@ -48,6 +48,7 @@ unless current_user?(@user)
   end
 
   
+  # Returns the current logged-in user (if any).
   # Returns the user corresponding to the remember token cookie.
   def current_user
 

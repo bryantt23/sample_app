@@ -9,8 +9,9 @@ class AccountActivationsController < ApplicationController
       
       # If the user is authenticated according to the booleans above, 
       # we need to activate the user and update the activated_at timestamp
-      user.update_attribute(:activated,    true)
-      user.update_attribute(:activated_at, Time.zone.now)
+      user.activate
+      # user.update_attribute(:activated,    true)
+      # user.update_attribute(:activated_at, Time.zone.now)
       log_in user
       flash[:success] = "Account activated!"
       redirect_to user
