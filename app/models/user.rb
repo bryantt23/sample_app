@@ -76,7 +76,13 @@ attribute
   end
 
   # Returns true if the given token matches the digest.
-  def authenticated?(remember_token)
+  # def authenticated?(remember_token)
+  def authenticated?(attribute, token)
+    
+    # metaprogramming - send method, which lets us call a method with a 
+    # name of our choice by “sending a message” to a given object    
+    digest = send("#{attribute}_digest")
+#     uses string interpolation
     
 #     to pass test about user logging out in one browser but not 
 # the other browser. i think it's because the password will now be nil
@@ -84,7 +90,8 @@ attribute
 # return guarantees that the rest of method gets ignored if digest is nil
     
  # verify that a given remember token matches the user’s remember digest
-    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+    # BCrypt::Password.new(remember_digest).is_password?(remember_token)
+    BCrypt::Password.new(digest).is_password?(token)
   end
 
   # Forgets a user.
