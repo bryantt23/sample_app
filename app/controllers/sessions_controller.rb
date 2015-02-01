@@ -9,11 +9,25 @@ class SessionsController < ApplicationController
   # in the database and has the given password, exactly as required
   
     if user && user.authenticate(params[:session][:password])
-      # Log the user in and redirect to the user's show page.
-      log_in user
+  
+      if user.activated?
+        log_in user
+        params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+        redirect_back_or user
+      else
+        message  = "Account not activated. "
+        message += "Check your email for the activation link."
+        flash[:warning] = message
+        redirect_to root_url
+      end
+  
       
-      # Handling the submission of the “remember me” checkbox   
-      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+      # before email authentication
+      # # Log the user in and redirect to the user's show page.
+      # log_in user
+#       
+      # # Handling the submission of the “remember me” checkbox   
+      # params[:session][:remember_me] == '1' ? remember(user) : forget(user)
 #       the above line supercedes the remember user
       
       # # remember a logged-in user
@@ -25,7 +39,7 @@ class SessionsController < ApplicationController
 #       supercedes line above 
 # To implement the forwarding itself, we use the redirect_back_or method to 
 # redirect to the requested URL if it exists, or some default URL otherwise
-      redirect_back_or user
+      # redirect_back_or user
       
     else
       # Create an error message.
