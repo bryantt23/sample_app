@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :microposts
   
 #   available via user.remember_token (for storage in the cookies)
 # but does NOT store in database
