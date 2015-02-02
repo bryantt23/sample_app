@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  has_many :microposts
+# if a user is destroyed, the user’s microposts should be destroyed as well  
+  has_many :microposts, dependent: :destroy
   
 #   available via user.remember_token (for storage in the cookies)
 # but does NOT store in database

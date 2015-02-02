@@ -81,6 +81,15 @@ valid? method
     assert_not @user.authenticated?(:remember, '')
   end
   
+  # check that destroying the user reduces the micropost count by 1
+  test "associated microposts should be destroyed" do
+    @user.save
+    @user.microposts.create!(content: "Lorem ipsum")
+    assert_difference 'Micropost.count', -1 do
+      @user.destroy
+    end
+  end
+  
   
   
 
