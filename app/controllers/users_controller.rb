@@ -29,6 +29,9 @@ class UsersController < ApplicationController
 #     instance variable = find method on User model to retrieve from 
 #     database, uses params to retrieve user id 
     @user = User.find(params[:id])
+    
+    # pass an explicit @microposts variable to will_paginate
+    @microposts = @user.microposts.paginate(page: params[:page])
 
 # 7.1.3 uses the byebug gem 
     # debugger
