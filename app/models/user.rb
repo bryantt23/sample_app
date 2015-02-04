@@ -139,6 +139,17 @@ attribute
     # “Password reset sent earlier than two hours ago.”  
     reset_sent_at < 2.hours.ago
   end
+    
+  # Defines a proto-feed.
+  # See "Following users" for the full implementation.
+  def feed
+    
+    # question mark ensures that id is properly escaped before 
+    # being included in the underlying SQL query
+    Micropost.where("user_id = ?", id)
+  end
+
+    
 
   private
 
