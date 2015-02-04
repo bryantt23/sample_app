@@ -12,4 +12,19 @@ class Micropost < ActiveRecord::Base
   
    validates :user_id, presence: true
   validates :content, presence: true, length: { maximum: 140 }
+  
+  # file size validation requires defining a custom validation
+  validate  :picture_size
+
+
+  private
+
+    # Validates the size of an uploaded picture.
+    def picture_size
+      if picture.size > 5.megabytes
+        
+        # custom error message
+        errors.add(:picture, "should be less than 5MB")
+      end
+    end
 end
