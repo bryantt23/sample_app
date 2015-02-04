@@ -5,9 +5,14 @@ class User < ActiveRecord::Base
   # This works because the microposts table has a user_id 
   # attribute to identify the user. An id used in this manner to 
   # connect two database tables is known as a foreign key
-  has_many :active_relationships, class_name:  "Relationship",
-                                  foreign_key: "follower_id",
-                                  dependent:   :destroy
+    has_many :active_relationships,  class_name:  "Relationship",
+                                   foreign_key: "follower_id",
+                                   dependent:   :destroy
+  has_many :passive_relationships, class_name:  "Relationship",
+                                   foreign_key: "followed_id",
+                                   dependent:   :destroy
+  has_many :following, through: :active_relationships,  source: :followed
+  has_many :followers, through: :passive_relationships, source: :follower
   
 #   available via user.remember_token (for storage in the cookies)
 # but does NOT store in database
@@ -155,6 +160,23 @@ attribute
     # being included in the underlying SQL query
     Micropost.where("user_id = ?", id)
   end
+
+  # Follows a user.
+  def follow(other_user)
+    active_relationships.create(followed_id: other_user.id)
+  end
+
+  # Unfollows a user.
+  def unfollow(other_user)
+    active_relationships.find_by(followed_id: other_user.id).destroy
+  end
+
+  # Returns true if the current user is following the other user.
+  def following?(other_user)
+    following.include?(other_user)
+  end
+
+  
 
     
 
