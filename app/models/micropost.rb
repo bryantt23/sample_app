@@ -1,4 +1,8 @@
 class Micropost < ActiveRecord::Base
+  
+  # This works because the microposts table has a user_id 
+  # attribute to identify the user. An id used in this manner to 
+  # connect two database tables is known as a foreign key
   belongs_to :user
   
    # “stabby lambda” syntax for an object called a Proc (procedure) or lambda, 

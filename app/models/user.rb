@@ -2,6 +2,13 @@ class User < ActiveRecord::Base
 # if a user is destroyed, the user’s microposts should be destroyed as well  
   has_many :microposts, dependent: :destroy
   
+  # This works because the microposts table has a user_id 
+  # attribute to identify the user. An id used in this manner to 
+  # connect two database tables is known as a foreign key
+  has_many :active_relationships, class_name:  "Relationship",
+                                  foreign_key: "follower_id",
+                                  dependent:   :destroy
+  
 #   available via user.remember_token (for storage in the cookies)
 # but does NOT store in database
   attr_accessor :remember_token, :activation_token, :reset_token
