@@ -12,6 +12,12 @@ Rails.application.routes.draw do
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
   
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
+  
   resources :users
   
 # activation email will involve a URL of the form
@@ -21,4 +27,7 @@ Rails.application.routes.draw do
 
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :microposts,          only: [:create, :destroy]
+  
+  # follows the Microposts resource example 
+  resources :relationships,       only: [:create, :destroy]
 end
