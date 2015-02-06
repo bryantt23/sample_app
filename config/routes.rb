@@ -18,8 +18,6 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :users
-  
 # activation email will involve a URL of the form
 # edit_account_activation_url(activation_token, ...)
 # which means we’ll need a named route for the edit action  
