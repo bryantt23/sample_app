@@ -118,7 +118,8 @@ valid? method
       assert_not michael.feed.include?(post_unfollowed)
     end
   end
-end
+  
+  
   
 
 end

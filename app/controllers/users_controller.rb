@@ -102,10 +102,11 @@ class UsersController < ApplicationController
     @title = "Followers"
     @user  = User.find(params[:id])
     @users = @user.followers.paginate(page: params[:page])
-    
-    # explicit call
     render 'show_follow'
   end
+
+    # explicit call
+    render 'show_follow'
 
     
     

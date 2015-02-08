@@ -158,7 +158,9 @@ attribute
     
     # question mark ensures that id is properly escaped before 
     # being included in the underlying SQL query
-    Micropost.where("user_id = ?", id)
+    # Micropost.where("user_id = ?", id)
+    
+    Micropost.where("user_id IN (?) OR user_id = ?", following_ids, id)
   end
 
   # Follows a user.
